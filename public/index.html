@@ -1,0 +1,612 @@
+<!-- language: html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Thomas Silva de Mendonça — Desenvolvedor de Software</title>
+    <meta name="description" content="Portfólio e currículo de Thomas Silva de Mendonça, Desenvolvedor de Software .NET, C#, React, Node.js, SQL e microsserviços." />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root{
+            --bg: #0b0d12;
+            --bg-alt: #0f1218;
+            --card: #131824;
+            --text: #e7ecf3;
+            --muted: #a9b4c4;
+            --brand: #5cc8ff;
+            --brand-2: #8a5cff;
+            --accent: #18e1a5;
+            --border: rgba(255,255,255,0.08);
+            --shadow: 0 10px 30px rgba(0,0,0,.35), 0 2px 8px rgba(0,0,0,.25);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --container: 1150px;
+            --grid-gap: 22px;
+            color-scheme: dark;
+        }
+        [data-theme="light"]{
+            --bg: #f6f7fb;
+            --bg-alt: #ffffff;
+            --card: #ffffff;
+            --text: #0f172a;
+            --muted: #475569;
+            --brand: #0ea5e9;
+            --brand-2: #7c3aed;
+            --accent: #059669;
+            --border: rgba(15, 23, 42, 0.08);
+            --shadow: 0 10px 30px rgba(2,6,23,.08), 0 2px 8px rgba(2,6,23,.06);
+            color-scheme: light;
+        }
+
+        *{box-sizing: border-box}
+        html,body{height:100%}
+        body{
+            margin:0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+            background: radial-gradient(1200px 600px at 80% -10%, rgba(138,92,255,.25), transparent 60%),
+            radial-gradient(1000px 600px at -10% 10%, rgba(92,200,255,.18), transparent 60%),
+            var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            letter-spacing: .2px;
+        }
+        a{color: var(--brand); text-decoration: none}
+        a:hover{opacity:.9}
+        img{max-width:100%; display:block}
+
+        .container{
+            width: min(100%, var(--container));
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+
+        header.site-header{
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: saturate(180%) blur(10px);
+            background: linear-gradient(180deg, rgba(15,18,24,.75), rgba(15,18,24,.4) 70%, transparent);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav{
+            display:flex; align-items:center; justify-content:space-between;
+            padding: 14px 0;
+        }
+        .brand{
+            display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.3px;
+        }
+        .brand-badge{
+            width:36px; height:36px; border-radius:10px;
+            background: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+            box-shadow: 0 8px 20px rgba(124,58,237,.35);
+            position: relative; overflow: hidden;
+        }
+        .brand-badge::after{
+            content:""; position:absolute; inset:0;
+            background: radial-gradient(160% 90% at -20% -30%, rgba(255,255,255,.35), transparent 60%);
+            mix-blend-mode: screen;
+        }
+        .nav-links{
+            display:flex; gap: 16px; flex-wrap: wrap;
+        }
+        .nav-links a{
+            color: var(--text); font-weight:600; padding:8px 12px; border-radius:8px;
+        }
+        .nav-links a:hover{background: rgba(255,255,255,.06)}
+        .actions{
+            display:flex; gap:10px; align-items:center;
+        }
+        .btn{
+            padding:10px 14px; border-radius:10px; font-weight:700; border:1px solid var(--border);
+            background: linear-gradient(180deg, var(--card), var(--bg-alt));
+            color: var(--text); box-shadow: var(--shadow);
+        }
+        .btn.primary{
+            background: linear-gradient(135deg, var(--brand), var(--brand-2));
+            border: none; color: #fff;
+        }
+        .theme-toggle{
+            background: transparent; border:1px solid var(--border); border-radius:10px;
+            color: var(--text); padding:8px 10px; cursor:pointer;
+        }
+
+        .hero{
+            padding: 72px 0 34px;
+        }
+        .hero-card{
+            border:1px solid var(--border); border-radius: var(--radius);
+            background:
+                    radial-gradient(1200px 600px at 80% -10%, rgba(138,92,255,.14), transparent 60%),
+                    radial-gradient(900px 500px at -10% 10%, rgba(92,200,255,.10), transparent 60%),
+                    linear-gradient(180deg, var(--card), var(--bg-alt));
+            box-shadow: var(--shadow);
+            padding: 34px;
+            position: relative; overflow: hidden;
+        }
+        .hero-card::after{
+            content:""; position:absolute; inset:0;
+            background: radial-gradient(600px 300px at 110% -20%, rgba(24,225,165,.2), transparent 60%);
+            pointer-events:none;
+        }
+        .hero-grid{
+            display:grid; grid-template-columns: 1.15fr .85fr; gap: 32px; align-items: center;
+        }
+        @media (max-width: 920px){
+            .hero-grid{grid-template-columns: 1fr}
+        }
+
+        .headline{
+            font-size: clamp(28px, 5vw, 44px); line-height:1.1; margin: 4px 0 12px; font-weight:800;
+        }
+        .subhead{
+            font-size: clamp(16px, 2.2vw, 18px); color: var(--muted); margin-bottom: 18px;
+        }
+        .badge-row{display:flex; gap:10px; flex-wrap: wrap; margin-bottom: 18px;}
+        .pill{
+            font-size:13px; letter-spacing:.3px;
+            padding:8px 10px; border-radius:999px; border:1px solid var(--border);
+            background: rgba(255,255,255,.04); color: var(--text);
+        }
+        .contact-list{
+            display:flex; gap:14px; flex-wrap: wrap; margin-top: 8px;
+        }
+        .contact-list a{display:inline-flex; align-items:center; gap:8px}
+
+        .hero-aside{
+            display:grid; gap: 14px;
+        }
+        .stat{
+            border:1px solid var(--border); border-radius: var(--radius-sm);
+            background: linear-gradient(180deg, var(--bg-alt), var(--card));
+            padding: 16px 16px 14px;
+        }
+        .stat .kpi{font-size: 28px; font-weight:800}
+        .stat .kpi small{font-size:14px; color: var(--muted); font-weight:600}
+
+        section{
+            padding: 26px 0;
+        }
+        .section-title{
+            font-size: 22px; font-weight:800; margin-bottom: 14px;
+            display:flex; align-items:center; gap: 10px;
+        }
+        .section-title .dot{
+            width:10px; height:10px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--brand), var(--brand-2));
+            box-shadow: 0 4px 14px rgba(124,58,237,.4);
+        }
+
+        .grid{
+            display:grid; gap: var(--grid-gap);
+        }
+        .grid.cols-3{grid-template-columns: repeat(3, 1fr)}
+        .grid.cols-2{grid-template-columns: repeat(2, 1fr)}
+        @media (max-width: 1000px){ .grid.cols-3{grid-template-columns: repeat(2, 1fr)} }
+        @media (max-width: 720px){ .grid.cols-2, .grid.cols-3{grid-template-columns: 1fr} }
+
+        .card{
+            border:1px solid var(--border); border-radius: var(--radius-sm);
+            background: linear-gradient(180deg, var(--bg-alt), var(--card));
+            box-shadow: var(--shadow);
+            padding: 18px;
+        }
+        .card h3{margin: 0 0 8px; font-size: 18px}
+        .card .meta{color: var(--muted); font-size: 14px; margin-bottom: 10px}
+
+        .timeline{position:relative; padding-left: 16px}
+        .timeline::before{
+            content:""; position:absolute; left: 6px; top: 4px; bottom: 6px; width:2px; background: linear-gradient(180deg, var(--brand), transparent);
+            border-radius: 2px;
+        }
+        .t-item{position:relative; margin-bottom: 14px}
+        .t-item::before{
+            content:""; position:absolute; left:-2px; top: 6px; width:10px; height:10px; border-radius:50%;
+            background: var(--brand-2); box-shadow: 0 0 0 3px rgba(124,58,237,.15);
+        }
+
+        .skills{display:flex; flex-wrap:wrap; gap:10px}
+        .skill{
+            padding:10px 12px; border-radius:10px; background: rgba(124,58,237,.10); border:1px solid var(--border);
+            font-weight:600; color: var(--text)
+        }
+
+        .footer{
+            padding: 24px 0 40px; color: var(--muted); font-size: 14px; text-align:center
+        }
+
+        .cta{
+            margin-top: 12px; display:flex; gap: 10px; flex-wrap: wrap
+        }
+        .kbd{
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+            background: rgba(255,255,255,.06); border:1px solid var(--border); border-bottom-width:2px; border-radius:8px;
+            padding: 2px 6px; font-size: 12px; color: var(--muted)
+        }
+
+        /* micro animations */
+        .fade-up{opacity:0; transform: translateY(8px); transition: all .6s cubic-bezier(.2,.8,.2,1)}
+        .fade-up.appear{opacity:1; transform: translateY(0)}
+        .hover-rise{transition: transform .25s ease, box-shadow .25s ease}
+        .hover-rise:hover{transform: translateY(-3px); box-shadow: 0 12px 26px rgba(0,0,0,.28)}
+
+        /* print */
+        @media print{
+            header, .theme-toggle, .cta, .footer{display:none !important}
+            body{background:#fff; color:#000}
+            .card, .hero-card{box-shadow:none; border:1px solid #ddd}
+        }
+    </style>
+</head>
+<body>
+<header class="site-header" aria-label="Cabeçalho do site">
+    <div class="container nav">
+        <div class="brand" aria-label="Identidade">
+            <div class="brand-badge" aria-hidden="true"></div>
+            <div>
+                <div>Thomas Silva de Mendonça</div>
+                <small style="color:var(--muted); font-weight:600">Desenvolvedor de Software</small>
+            </div>
+        </div>
+        <nav class="nav-links" aria-label="Navegação principal">
+            <a href="#sobre">Sobre</a>
+            <a href="#experiencia">Experiência</a>
+            <a href="#formacao">Formação</a>
+            <a href="#skills">Skills</a>
+            <a href="#contato">Contato</a>
+        </nav>
+        <div class="actions">
+            <button id="themeToggle" class="theme-toggle" aria-label="Alternar tema">Tema</button>
+            <a class="btn primary" href="#contato">Vamos conversar</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container hero-card hover-rise fade-up">
+            <div class="hero-grid">
+                <div>
+                    <div class="pill" style="display:inline-block">Remoto · Sobral, Ceará, Brasil</div>
+                    <h1 class="headline">Construo soluções robustas e escaláveis em .NET, React e Microsserviços</h1>
+                    <p class="subhead">
+                        Experiência em sistemas corporativos críticos, desempenho e qualidade de ponta a ponta — do back-end ao front-end.
+                    </p>
+
+                    <div class="badge-row" aria-label="Principais competências">
+                        <span class="pill">.NET · C#</span>
+                        <span class="pill">React</span>
+                        <span class="pill">Node.js</span>
+                        <span class="pill">SQL Server · PostgreSQL</span>
+                        <span class="pill">OutSystems</span>
+                        <span class="pill">Microsserviços</span>
+                        <span class="pill">AWS</span>
+                        <span class="pill">Docker</span>
+                    </div>
+
+                    <div class="cta">
+                        <a class="btn primary" href="#contato">Disponível para conversar</a>
+                        <a class="btn" href="https://linkedin.com/in/thomas-mendonça-457bb414b" target="_blank" rel="noopener">LinkedIn</a>
+                        <span class="kbd">Git · Agile · SOLID</span>
+                    </div>
+
+                    <div class="contact-list" style="margin-top:14px">
+                        <a href="tel:+558897971243" aria-label="Telefone">(88) 9 9797-1243</a>
+                        <span style="color:var(--muted)">•</span>
+                        <a href="mailto:thomas.sm1013@gmail.com" aria-label="Email">thomas.sm1013@gmail.com</a>
+                        <span style="color:var(--muted)">•</span>
+                        <a href="https://linkedin.com/in/thomas-mendonça-457bb414b" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            linkedin.com/in/thomas-mendonça-457bb414b
+                        </a>
+                    </div>
+                </div>
+
+                <aside class="hero-aside" aria-label="Destaques">
+                    <div class="stat">
+                        <div class="kpi">6+ <small>anos</small></div>
+                        <div style="color:var(--muted)">Criando soluções para ambientes corporativos</div>
+                    </div>
+                    <div class="stat">
+                        <div class="kpi">Back + Front</div>
+                        <div style="color:var(--muted)">.NET, React, Node.js e integrações</div>
+                    </div>
+                    <div class="stat">
+                        <div class="kpi">Enterprise</div>
+                        <div style="color:var(--muted)">Microsserviços, mensageria e bancos SQL</div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="fade-up">
+        <div class="container grid cols-2">
+            <div class="card">
+                <div class="section-title"><span class="dot"></span> Perfil Profissional</div>
+                <p>
+                    Desenvolvedor de software com experiência sólida em .NET, C#, React, Node.js, SQL Server, PostgreSQL, OutSystems e arquitetura de microsserviços. Atuo em sistemas corporativos críticos, do back-end ao front-end, com foco em qualidade, desempenho e escalabilidade.
+                </p>
+                <p>
+                    Perfil colaborativo, proativo e com facilidade para aprender novas tecnologias e metodologias ágeis. Trabalho de forma remota, em times multidisciplinares e projetos de alta complexidade.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="section-title"><span class="dot"></span> Informações</div>
+                <ul style="margin:0; padding-left:18px">
+                    <li>Local: Sobral, Ceará, Brasil · Remoto</li>
+                    <li>Contato: (88) 9 9797-1243 · thomas.sm1013@gmail.com</li>
+                    <li>LinkedIn: <a href="https://linkedin.com/in/thomas-mendonça-457bb414b" target="_blank" rel="noopener">/in/thomas-mendonça-457bb414b</a></li>
+                    <li>Habilitação: A e B</li>
+                    <li>Voluntariado: Ensino bíblico em cursos particulares</li>
+                </ul>
+                <div class="cta" style="margin-top:12px">
+                    <a class="btn" href="#contato">Enviar mensagem</a>
+                    <button class="btn" onclick="window.print()">Imprimir CV</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experiencia" class="fade-up">
+        <div class="container">
+            <div class="section-title"><span class="dot"></span> Experiência Profissional</div>
+            <div class="grid cols-2">
+                <div class="card hover-rise">
+                    <h3>Grendene S/A — Analista de Desenvolvimento II</h3>
+                    <div class="meta">jul/2024 – out/2025 · Sobral, CE · Remoto</div>
+                    <ul style="margin:0; padding-left:18px">
+                        <li>Sistemas críticos de estocagem e controle de produtos</li>
+                        <li>Migração OutSystems para .NET C# e React</li>
+                        <li>Integrações com SQL Server e APIs corporativas</li>
+                        <li>Entrega contínua em Scrum, com foco em sustentabilidade</li>
+                    </ul>
+                </div>
+
+                <div class="card hover-rise">
+                    <h3>Globalsys Soluções em TI — Desenvolvedor Pleno/Sênior</h3>
+                    <div class="meta">out/2022 – nov/2023 · Vitória, ES · Remoto</div>
+                    <ul style="margin:0; padding-left:18px">
+                        <li>Atuação full‑stack para clientes corporativos</li>
+                        <li>Migração de PHP para C# (.NET) com ganhos de performance</li>
+                        <li>Back-end para administradora de cartões (.NET, React, AWS)</li>
+                        <li>Mensageria e microsserviços · EF com SQL Server e PostgreSQL</li>
+                    </ul>
+                </div>
+
+                <div class="card hover-rise">
+                    <h3>Fácil Espaider — Programador de Sistemas Pleno</h3>
+                    <div class="meta">out/2021 – set/2022 · Blumenau, SC · Remoto</div>
+                    <ul style="margin:0; padding-left:18px">
+                        <li>Manutenção e evolução do software jurídico Espaider</li>
+                        <li>.NET focado em performance e estabilidade</li>
+                        <li>Squads ágeis aplicando Agile e GitFlow</li>
+                    </ul>
+                </div>
+
+                <div class="card hover-rise">
+                    <h3>Grendene S/A — Software Developer</h3>
+                    <div class="meta">dez/2019 – out/2021 · Brasil</div>
+                    <ul style="margin:0; padding-left:18px">
+                        <li>Sistemas web para Controladoria, Manutenção e Fábrica</li>
+                        <li>OutSystems, .NET, HTML, JavaScript e CSS</li>
+                        <li>Melhorias de desempenho e integrações internas</li>
+                    </ul>
+                </div>
+
+                <div class="card hover-rise">
+                    <h3>Grendene S/A — Estagiário</h3>
+                    <div class="meta">set/2019 – dez/2019</div>
+                    <ul style="margin:0; padding-left:18px">
+                        <li>Apoio no desenvolvimento de aplicações internas</li>
+                        <li>Manutenção de banco de dados SQL</li>
+                    </ul>
+                </div>
+
+                <div class="card hover-rise">
+                    <h3>Desenvolvedor Web Freelancer</h3>
+                    <div class="meta">fev/2017 – jul/2019 · Brasil</div>
+                    <ul style="margin:0; padding-left:18px">
+                        <li>Sites e sistemas sob demanda com PHP, C#, HTML, CSS e JS</li>
+                        <li>APIs REST e bancos SQL</li>
+                        <li>Experiência com Docker e Git</li>
+                    </ul>
+                </div>
+
+                <div class="card hover-rise">
+                    <h3>Técnico de Informática (Autônomo)</h3>
+                    <div class="meta">2014 – 2018</div>
+                    <ul style="margin:0; padding-left:18px">
+                        <li>Manutenção física e lógica de computadores</li>
+                        <li>Suporte técnico e treinamento a usuários</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="formacao" class="fade-up">
+        <div class="container grid cols-2">
+            <div class="card">
+                <div class="section-title"><span class="dot"></span> Formação Acadêmica</div>
+                <div class="timeline">
+                    <div class="t-item">
+                        <strong>Ciências da Computação — Universidade Estadual Vale do Acaraú (UVA)</strong>
+                        <div class="meta">Conclusão prevista: 2026</div>
+                    </div>
+                    <div class="t-item">
+                        <strong>Ensino Médio — Colégio Luciano Feijão</strong>
+                        <div class="meta">Conclusão: 2015</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="section-title"><span class="dot"></span> Cursos e Aperfeiçoamentos</div>
+                <ul style="margin:0; padding-left:18px">
+                    <li>Formação completa em C# e .NET</li>
+                    <li>Curso de HTML, CSS e JavaScript</li>
+                    <li>Bootcamp de CyberSecurity — IGTI</li>
+                    <li>Inglês: Básico a Intermediário (Yázigi e Fix English)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="fade-up">
+        <div class="container">
+            <div class="section-title"><span class="dot"></span> Conhecimentos Técnicos</div>
+            <div class="grid cols-3">
+                <div class="card">
+                    <h3>Linguagens</h3>
+                    <div class="skills">
+                        <span class="skill">C#</span>
+                        <span class="skill">JavaScript</span>
+                        <span class="skill">PHP</span>
+                        <span class="skill">Node.js</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Frameworks</h3>
+                    <div class="skills">
+                        <span class="skill">.NET</span>
+                        <span class="skill">React</span>
+                        <span class="skill">OutSystems</span>
+                        <span class="skill">Entity Framework</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Bancos de Dados</h3>
+                    <div class="skills">
+                        <span class="skill">SQL Server</span>
+                        <span class="skill">PostgreSQL</span>
+                        <span class="skill">MySQL</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Arquitetura</h3>
+                    <div class="skills">
+                        <span class="skill">Microsserviços</span>
+                        <span class="skill">REST API</span>
+                        <span class="skill">SOLID</span>
+                        <span class="skill">Design Patterns</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Mensageria e DevOps</h3>
+                    <div class="skills">
+                        <span class="skill">RabbitMQ</span>
+                        <span class="skill">Kafka</span>
+                        <span class="skill">Docker</span>
+                        <span class="skill">Redis</span>
+                        <span class="skill">AWS</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Processos</h3>
+                    <div class="skills">
+                        <span class="skill">Git (avançado)</span>
+                        <span class="skill">Scrum</span>
+                        <span class="skill">Kanban</span>
+                        <span class="skill">GitFlow</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="fade-up">
+        <div class="container">
+            <div class="section-title"><span class="dot"></span> Contato</div>
+            <div class="grid cols-2">
+                <div class="card">
+                    <h3>Vamos conversar</h3>
+                    <p>Aberto a oportunidades remotas e projetos desafiadores. Envie uma mensagem:</p>
+                    <form class="grid" style="grid-template-columns:1fr 1fr; gap:12px" onsubmit="sendEmail(event)">
+                        <div style="grid-column: span 1">
+                            <label for="nome" style="display:block; font-weight:600">Seu nome</label>
+                            <input id="nome" name="nome" required placeholder="Seu nome"
+                                   style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); background: var(--bg-alt); color: var(--text)">
+                        </div>
+                        <div style="grid-column: span 1">
+                            <label for="email" style="display:block; font-weight:600">Seu e-mail</label>
+                            <input id="email" type="email" name="email" required placeholder="voce@exemplo.com"
+                                   style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); background: var(--bg-alt); color: var(--text)">
+                        </div>
+                        <div style="grid-column: 1 / -1">
+                            <label for="mensagem" style="display:block; font-weight:600">Mensagem</label>
+                            <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Como posso ajudar?"
+                                      style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); background: var(--bg-alt); color: var(--text)"></textarea>
+                        </div>
+                        <div style="grid-column: 1 / -1; display:flex; gap:10px; align-items:center">
+                            <button class="btn primary" type="submit">Enviar</button>
+                            <small class="muted" style="color:var(--muted)">ou envie diretamente para <a href="mailto:thomas.sm1013@gmail.com">thomas.sm1013@gmail.com</a></small>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3>Direto ao ponto</h3>
+                    <ul style="margin:0; padding-left:18px">
+                        <li>📞 <a href="tel:+558897971243">(88) 9 9797-1243</a></li>
+                        <li>✉️ <a href="mailto:thomas.sm1013@gmail.com">thomas.sm1013@gmail.com</a></li>
+                        <li>🔗 <a href="https://linkedin.com/in/thomas-mendonça-457bb414b" target="_blank" rel="noopener">LinkedIn</a></li>
+                    </ul>
+                    <div class="cta" style="margin-top:14px">
+                        <a class="btn" href="#sobre">Ver resumo</a>
+                        <a class="btn" href="#experiencia">Ver experiência</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    © <span id="year"></span> Thomas Silva de Mendonça · Construído com foco em performance, acessibilidade e design.
+</footer>
+
+<script>
+    // Tema
+    const root = document.documentElement;
+    const key = 'pref-theme';
+    const applyTheme = (t) => root.setAttribute('data-theme', t);
+    const systemPref = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    const saved = localStorage.getItem(key) || systemPref;
+    applyTheme(saved);
+    document.getElementById('themeToggle').addEventListener('click', ()=>{
+        const next = (root.getAttribute('data-theme') === 'light') ? 'dark' : 'light';
+        applyTheme(next); localStorage.setItem(key, next);
+    });
+
+    // Ano rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Animações de entrada
+    const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('appear'); io.unobserve(e.target) }});
+    }, {threshold: .1});
+    document.querySelectorAll('.fade-up').forEach(el=> io.observe(el));
+
+    // Form -> mailto
+    function sendEmail(e){
+        e.preventDefault();
+        const nome = document.getElementById('nome').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const msg = document.getElementById('mensagem').value.trim();
+        const assunto = encodeURIComponent('Contato via site — ' + nome);
+        const corpo = encodeURIComponent(`Nome: ${nome}\nEmail: ${email}\n\nMensagem:\n${msg}`);
+        window.location.href = `mailto:thomas.sm1013@gmail.com?subject=${assunto}&body=${corpo}`;
+    }
+</script>
+</body>
+</html>
